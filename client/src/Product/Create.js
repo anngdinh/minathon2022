@@ -15,31 +15,43 @@ const User = {
 }
 
 export default function Create() {
-    const [product, setProduct] = useState({
-        
-    })
+    const [newProduct, setNewproduct] = useState({
+        title: "",
+        amount: "",
+        image: "",
+        description: "",
+        address: "",
+        category: "",
+    });
+    const { title, amount, image, description, address, category } = newProduct;
+    const onChangeField = (e) => {
+        setNewproduct({
+            ...newProduct,
+            [e.target.name]: e.target.value,
+        });
+    };
     return (
         <div>
             <Title>
                 Create Donation
             </Title>
-            <Container style={{maxWidth: "900px"}}>
+            <Container style={{ maxWidth: "900px" }}>
                 <form encType='multipart/form-data' method="POST">
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Title</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" /></Col>
+                            <Col lg={9.5}><Input type="text" onChange={onChangeField} name="title" value={title}/></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Category</NameInput></Col>
                             <Col lg={9.5}>
-                                <Form.Select aria-label="Default select example">
-                                    <option>Open this select menu</option>
-                                    <option value="1">Clothing</option>
-                                    <option value="2">Funiture</option>
-                                    <option value="3">Shoe</option>
+                                <Form.Select aria-label="Default select example"  onChange={onChangeField} name="category" value={category}>
+                                    {/* <option>Open this select menu</option> */}
+                                    <option value="clothing">Clothing</option>
+                                    <option value="funiture">Funiture</option>
+                                    <option value="shoe">Shoe</option>
                                 </Form.Select>
                             </Col>
                         </Row>
@@ -47,29 +59,29 @@ export default function Create() {
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Image</NameInput></Col>
-                            <Col lg={9.5}><input type="file" /></Col>
+                            <Col lg={9.5}><input type="file" onChange={onChangeField} name="image" value={image} /></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Description</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" /></Col>
+                            <Col lg={9.5}><Input type="text" onChange={onChangeField} name="description" value={description} /></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Amount</NameInput></Col>
-                            <Col lg={9.5}><Input type="number" /></Col>
+                            <Col lg={9.5}><Input type="number"  onChange={onChangeField} name="amount" value={amount}/></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Address</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" /></Col>
+                            <Col lg={9.5}><Input type="text"  onChange={onChangeField} name="address" value={address}/></Col>
                         </Row>
                     </ContainerInput>
 
-                    <ButtonSave>Create</ButtonSave>
+                    <ButtonSave onClick={() => { console.log(newProduct); }}>Create</ButtonSave>
                 </form>
             </Container>
 
