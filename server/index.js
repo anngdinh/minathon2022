@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const config = require("./configure.js");
+const fileupload = require("express-fileupload");
 // const DeviceRoute = require("./Route/DeviceRoute.js");
 // const NotiRoute = require("./Route/NotiRoute.js");
 const UserRoute = require("./Route/UserRoute.js");
@@ -33,6 +34,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use("/device", DeviceRoute);
 // app.use("/noti", NotiRoute);
+app.use(
+  fileupload({
+    useTempFiles: true,
+  })
+);
+app.use("/public/", express.static("public"));
 app.use("/user", UserRoute);
 app.use("/category", CategoryRoute);
 app.use("/product", ProductRoute);

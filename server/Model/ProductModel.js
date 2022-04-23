@@ -20,7 +20,6 @@ let Product = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-
   amount: {
     type: Number,
   },
