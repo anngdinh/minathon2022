@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Container, Row, Col } from "react-grid-system";
 import { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 const User = {
     "username": "Long",
@@ -14,48 +15,42 @@ const User = {
 }
 
 export default function Create() {
-    const choices = [
-        {
-            id: 1,
-            name: "Male"
-        },
-        {
-            id: 2,
-            name: "Female"
-        },
-        {
-            id: 3,
-            name: "Other"
-        }
-    ]
-
-    const [checked, setChecked] = useState(1);
 
     return (
         <div>
-            <Container>
+            <Title>
+                Create Donation
+            </Title>
+            <Container style={{maxWidth: "900px"}}>
                 <form encType='multipart/form-data' method="POST">
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>CategoryId</NameInput></Col>
+                            <Col lg={2.5}><NameInput>Title</NameInput></Col>
                             <Col lg={9.5}><Input type="text" /></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Img</NameInput></Col>
-                            <Col lg={9.5}><Input type="file" /></Col>
+                            <Col lg={2.5}><NameInput>Category</NameInput></Col>
+                            <Col lg={9.5}>
+                                <Form.Select aria-label="Default select example">
+                                    <option>Open this select menu</option>
+                                    <option value="1">Clothing</option>
+                                    <option value="2">Funiture</option>
+                                    <option value="3">Shoe</option>
+                                </Form.Select>
+                            </Col>
+                        </Row>
+                    </ContainerInput>
+                    <ContainerInput>
+                        <Row>
+                            <Col lg={2.5}><NameInput>Image</NameInput></Col>
+                            <Col lg={9.5}><input type="file" /></Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Description</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" /></Col>
-                        </Row>
-                    </ContainerInput>
-                    <ContainerInput>
-                        <Row>
-                            <Col lg={2.5}><NameInput>User id</NameInput></Col>
                             <Col lg={9.5}><Input type="text" /></Col>
                         </Row>
                     </ContainerInput>
@@ -67,21 +62,28 @@ export default function Create() {
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Title</NameInput></Col>
+                            <Col lg={2.5}><NameInput>Address</NameInput></Col>
                             <Col lg={9.5}><Input type="text" /></Col>
                         </Row>
                     </ContainerInput>
 
-                    <ButtonSave>Save</ButtonSave>
+                    <ButtonSave>Create</ButtonSave>
                 </form>
             </Container>
 
 
-        </div>
+        </div >
     )
 }
 
 
+const Title = styled.div`
+    font-size: 30px;
+    font-weight: bold;
+    border-left: 5px solid blue;
+    margin: 30px 0 30px 17vw;
+    padding-left: 3vw;
+`
 const Line = styled.hr`
     margin-top: 10px;
     margin-bottom: 10px;
@@ -106,14 +108,14 @@ const ContainerImg = styled.div`
 
 const ContainerInput = styled.div`
     /* background-color: #F5F7FF; */
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     border-top-right-radius: 15px;
     padding-top: 5px;
 `
 const NameInput = styled.span`
     font-weight: 600;
     margin-bottom: 5px;
-    font-size: 90%;
+    font-size: 20px;
     height: 30px;
     line-height: 30px;
     
@@ -137,26 +139,10 @@ const InputChoice = styled.input`
     margin: 5px;
     font-size: 90%;
 `
-const ButtonSave = styled.button`
-    width: 90px;
-    height: 40px;
-    border-radius: 10px;
-    border: none;
+const ButtonSave = styled(Button)`
     float: right;
-    margin-top: 20px;
-    background-color: #0156FF;
-    font-weight: 600;
-    color: white;
-    transition: all .3s;
-    :hover {
-        background-color: #00369F;
-    }
-    cursor: pointer;
 `
-const Title = styled.div`
-    font-weight: 600;
-    font-size: 104%;
-`
+
 const IconEdit = styled.div`
     background-color: 	#CCCCCC;
     border-radius: 50%;

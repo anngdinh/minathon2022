@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Card, CardGroup, Figure, Badge } from 'react-bootstrap';
 
 export default function ProductList({ list, type }) {
-
+// type 1 for donation, type 2 for received
 
   return (
     <div>
@@ -21,9 +21,9 @@ export default function ProductList({ list, type }) {
               <p className='title'>{list[0].title}</p>
               <div className='state'>
 
-                <Status>
+                {/* <Status>
                   <i class="fa-check-circle"></i> in stock
-                </Status>
+                </Status> */}
               </div>
 
             </TitleProduct>
@@ -37,8 +37,8 @@ export default function ProductList({ list, type }) {
         </ProductItem>
       </Card>
 
-      {list[0].address}
-      {type}
+      {/* {list[0].address}
+      {type} */}
     </div>
   )
 }
@@ -74,8 +74,10 @@ const TitleProduct = styled.div`
   flex-direction: row;
   justify-content: space-between;
   .title {
-    color: red;
+    color: black;
     margin: 0;
+    font-weight: bold;
+    font-size: 28px;
   }
 `
 const Category = styled.p`
