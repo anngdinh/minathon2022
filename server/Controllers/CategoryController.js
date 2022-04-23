@@ -42,7 +42,11 @@ class CategoryController {
             // console.log(typeof account);
             res.json(CategoryModel);
           }
-        });
+        })
+          .clone()
+          .catch(function (err) {
+            console.log(err);
+          });
       } catch (error) {
         console.log(error);
       }

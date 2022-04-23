@@ -45,7 +45,11 @@ class TransitionController {
             // console.log(typeof account);
             res.json(TransitionModel);
           }
-        });
+        })
+          .clone()
+          .catch(function (err) {
+            console.log(err);
+          });
       } catch (error) {
         console.log(error);
       }

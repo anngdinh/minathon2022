@@ -2,11 +2,14 @@ const express = require("express");
 let ProductModel = require("../Model/ProductModel");
 class ProductController {
   async createProduct(req, res) {
+    // console.log(req.file);
+    // console.log(req.body.img);
+    // console.log(req);
     const { categoryId, img, description, title, userId, amount } = req.body;
     try {
       const newProduct = new ProductModel({
         categoryId: categoryId,
-        img: img,
+        img: img === undefined ? ["xx", "tt"] : img,
         description: description,
         title: title,
         userId: userId,
@@ -47,7 +50,11 @@ class ProductController {
             // console.log(typeof account);
             res.json(ProductModel);
           }
-        });
+        })
+          .clone()
+          .catch(function (err) {
+            console.log(err);
+          });
       } catch (error) {
         console.log(error);
       }

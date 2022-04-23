@@ -49,7 +49,11 @@ class UserController {
             // console.log(typeof account);
             res.json(UserModel);
           }
-        });
+        })
+          .clone()
+          .catch(function (err) {
+            console.log(err);
+          });
       } catch (error) {
         console.log(error);
       }
