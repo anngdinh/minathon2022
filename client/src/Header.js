@@ -1,82 +1,78 @@
 import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
-import { Navbar, Container, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Dropdown, Button } from 'react-bootstrap';
 
 const Header = () => {
-    return <>
+  return <>
 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ backgroundColor: 'black' }}>
-            <Container style={{}}>
-                <Navbar.Brand href="#home" className="d-flex flex-row align-items-center">
-                    <img
-                        src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT"
-                        width="55"
-                        height="55"
-                        className="d-inline-block align-top"
-                    />
-                    <Title>
-                        BK SHOP
-                    </Title>
-                </Navbar.Brand>
+    <Navbar collapseOnSelect expand="lg" variant="dark" style={{ backgroundColor: '#002c5c' }}>
+      <Container style={{}}>
+        <Navbar.Brand href="#home" className="d-flex flex-row align-items-center">
+          <img
+            src="https://i.ibb.co/Th4Pwvw/logo-new.png" alt="Logo HCMUT"
+            width="55"
+            height="55"
+            className="d-inline-block align-top"
+          />
+          <Title>
+            WESHARE
+          </Title>
+        </Navbar.Brand>
 
-                <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav">
 
-                    <SearchBar className="searchbar">
-                        <SearchButton >
-                            <i class="fa fa-search"></i>
-                        </SearchButton>
-                        <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
-                    </SearchBar>
 
-                    <Nav className="me-auto">
-                    </Nav>
+          <Nav className="me-auto">
+          </Nav>
 
-                    <Nav style={{ marginRight: '20px' }}>
-                        {/* <Nav.Link eventKey={2} href="#memes">
+          <Nav style={{ marginRight: '20px' }}>
+            {/* <Nav.Link eventKey={2} href="#memes">
                             Dank memes
                         </Nav.Link> */}
-                        <Nav.Link href="#features">ABOUT</Nav.Link>
-                        <Nav.Link href="#pricing">NEWS</Nav.Link>
-                        <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Best Seller</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">My Wish List</NavDropdown.Item>
-                        </NavDropdown>
+            <Nav.Link href="#features">ABOUT</Nav.Link>
+            <Nav.Link href="#pricing">NEWS</Nav.Link>
+            <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Best Seller</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">My Wish List</NavDropdown.Item>
+            </NavDropdown>
 
-                    </Nav>
-                </Navbar.Collapse>
+          </Nav>
+        </Navbar.Collapse>
 
-                <NavIcon>
-                    <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                        <CartIcon />
-                        <CartCounter>20</CartCounter>
-                    </div>
+        <NavIcon>
 
-                    {/* <UserIcon>
-                    </UserIcon> */}
-                    <Dropdown>
-                        <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none' }}>
-                            <UserIcon>
-                            </UserIcon>
-                        </Dropdown.Toggle>
+          <Dropdown>
+            <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none' }}>
+              <UserIcon>
+              </UserIcon>
+            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
-                            <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">My Account</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">My Wishlist</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item href="#/action-2">Sign out</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </NavIcon>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            </Container>
-        </Navbar>
-    </>
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
+              <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">My Account</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="#/action-2">Sign out</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </NavIcon>
+        <Button variant="primary">Become a Donator</Button>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      </Container>
+    </Navbar>
+
+    <SubNav>
+      <SubNavItem>Getting support</SubNavItem>
+      <SubNavItem>How you can help</SubNavItem>
+      <SubNavItem>Donate</SubNavItem>
+      <SubNavItem>Play and win</SubNavItem>
+      <SubNavItem>About us</SubNavItem>
+    </SubNav>
+  </>
 };
 
 const Title = styled.p`
@@ -136,7 +132,6 @@ const NavIcon = styled.div`
     /* position: relative; */
   }
 `;
-
 const CartIcon = styled(ShoppingCart)`
   color: white;
   font-size: 50pt;
@@ -163,5 +158,27 @@ const UserIcon = styled(Person)`
   color: white;
   width: 10vw;
 `;
+const SubNav = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid gray;
+`;
+const SubNavItem = styled.button`
+  border: none;
+  background-color: white;
+  padding: 10px;
+  flex: auto 1 1;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+  :hover {
+    background-color: #7cd2ff;
+  }
+  
+  color: #002c5c;
+  font-weight: bold;
+  font-size: 22px;
+`
+
 
 export default Header;

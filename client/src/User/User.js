@@ -70,7 +70,7 @@ const User = () => {
           
           {targetNavItem==='my-account' && <Information/>}
           {targetNavItem==='donation' && <ProductList list={Products} type={1} />}
-          {targetNavItem==='received' && <ProductList list={Products} type={1} />}
+          {targetNavItem==='received' && <ProductList list={Products} type={2} />}
         </Content>
       </Row>
     </Container>

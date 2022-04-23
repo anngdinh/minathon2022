@@ -37,19 +37,23 @@ export default function Create() {
       image: e.target.files[0],
     });
   };
+  // let categories;
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:5000/category")
       .then((res) => {
-        const categoryList = res.data;
-        console.log(categoryList);
+        // categories = res.data;
+        console.log(res.data);
+        setCategories(res.data);
+        console.log(categories);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const handleClick = () => {
     const formData = new FormData();
-    formData.append("categoryId", "6263ab9deb735b01400c03cc");
+    formData.append("categoryId", newProduct.category);
     formData.append("description", newProduct.description);
     formData.append("title", newProduct.title);
     formData.append("userId", "6263a3b447b5920d614a6f7f");
@@ -90,9 +94,14 @@ export default function Create() {
                   value={category}
                 >
                   {/* <option>Open this select menu</option> */}
-                  <option value="clothing">Clothing</option>
-                  <option value="funiture">Funiture</option>
-                  <option value="shoe">Shoe</option>
+                  <option key="xx" selected hidden>
+                    Choose one
+                  </option>
+                  {categories.map((cate, index) => (
+                    <option key={cate._id} value={cate._id}>
+                      {cate.name}
+                    </option>
+                  ))}
                 </Form.Select>
               </Col>
             </Row>
@@ -138,21 +147,6 @@ export default function Create() {
                   onChange={onChangeField}
                   name="amount"
                   value={amount}
-                />
-              </Col>
-            </Row>
-          </ContainerInput>
-          <ContainerInput>
-            <Row>
-              <Col lg={2.5}>
-                <NameInput>Address</NameInput>
-              </Col>
-              <Col lg={9.5}>
-                <Input
-                  type="text"
-                  onChange={onChangeField}
-                  name="address"
-                  value={address}
                 />
               </Col>
             </Row>
