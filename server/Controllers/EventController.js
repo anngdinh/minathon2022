@@ -28,7 +28,6 @@ class EventController {
     console.log(req.query.id);
     if (req.query.id !== undefined) {
       try {
-        console.log("cc");
         await EventModel.findOne(
           { _id: req.query.id },
           function (err, EventModel) {
@@ -54,6 +53,7 @@ class EventController {
           }
         })
           .populate("userID", ["name"])
+          .populate("listJoin", ["name"])
           .clone()
           .catch(function (err) {
             console.log(err);
@@ -106,6 +106,29 @@ class EventController {
           title: title,
         },
         { new: true }
+      );
+      if (!updateEvent) {
+        res.status(401).json({ success: false, msg: "Event not found" });
+      }
+      res.send({
+        success: true,
+        Event: updateEvent,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({ message: "Error" });
+    }
+  }
+  async updateEventMember(req, res) {
+    try {
+      console.log(req.query);
+      const id = req.query.id;
+      const { idUser } = req.body;
+      // const listJoin = undefined;
+      let updateEvent = await EventModel.findOneAndUpdate(
+        { _id: id },
+        { $push: { listJoin: idUser } },
+        { new: true, upsert: true }
       );
       if (!updateEvent) {
         res.status(401).json({ success: false, msg: "Event not found" });
