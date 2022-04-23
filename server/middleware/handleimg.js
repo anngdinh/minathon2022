@@ -10,11 +10,9 @@ const fileFilter = (req, file, cb) => {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log("vcc");
-    cb(null, "./public");
+    cb(null, "public");
   },
   filename: function (req, file, cb) {
-    console.log("vcc");
     cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
   },
 });

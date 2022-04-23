@@ -2,15 +2,12 @@ const express = require("express");
 let ProductModel = require("../Model/ProductModel");
 class ProductController {
   async createProduct(req, res) {
-    console.log(req.file);
-    console.log(req.files);
-    console.log(req.body.img);
-    console.log(req.body);
+    console.log("path", `http://localhost:5000/${req.file.path}`);
     const { categoryId, img, description, title, userId, amount } = req.body;
     try {
       const newProduct = new ProductModel({
         categoryId: categoryId,
-        img: img === undefined ? ["xx", "tt"] : img,
+        img: [`http://localhost:5000/${req.file.path}`],
         description: description,
         title: title,
         userId: userId,

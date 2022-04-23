@@ -34,11 +34,11 @@ mongoose
 // app.use(bodyParser.json());
 // app.use("/device", DeviceRoute);
 // app.use("/noti", NotiRoute);
-app.use(
-  fileupload({
-    useTempFiles: true,
-  })
-);
+// app.use(
+//   fileupload({
+//     useTempFiles: true,
+//   })
+// );
 app.use("/public/", express.static("public"));
 app.use("/user", UserRoute);
 app.use("/category", CategoryRoute);
