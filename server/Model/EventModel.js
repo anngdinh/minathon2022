@@ -1,20 +1,29 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 let Event = new Schema({
+  userID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  listJoin: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   description: {
     type: String,
   },
   address: {
     type: String,
   },
-  numRegiste: {
+  numRegister: {
     type: Number,
   },
-
-  state: {
-    type: String,
-  },
-
+  startTime: String,
+  endTime: String,
+  title: String,
+  img: String,
   date: {
     type: Date,
   },

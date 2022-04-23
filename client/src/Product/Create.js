@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Row, Col } from "react-grid-system";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 const User = {
@@ -37,6 +37,15 @@ export default function Create() {
       image: e.target.files[0],
     });
   };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/category")
+      .then((res) => {
+        const categoryList = res.data;
+        console.log(categoryList);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleClick = () => {
     const formData = new FormData();
