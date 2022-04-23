@@ -8,7 +8,8 @@ import { Breadcrumbs, Link, Typography } from '@mui/material'
 
 import Information from './Information'
 import ProductList from './ProductList'
-
+import Header from '../Header'
+import Footer from '../Footer'
 const Products = [
   {
       "img": "https://www.greenqueen.com.hk/wp-content/uploads/2021/07/Rental-Fashion-Causes-More-Emissions-Than-Throwing-Clothes-Away.jpg",
@@ -44,7 +45,7 @@ const User = () => {
 
   return (
     <>
-    {/* <Header/> */}
+    <Header/>
     <Container>
       <Head>
         <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
@@ -73,7 +74,7 @@ const User = () => {
         </Content>
       </Row>
     </Container>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   )
 }
