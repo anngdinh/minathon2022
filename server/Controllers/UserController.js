@@ -2,6 +2,7 @@ const express = require("express");
 let UserModel = require("../Model/UserModel");
 class UserController {
   async createUser(req, res) {
+    console.log(req.body);
     const { name, phone, username, password } = req.body;
     try {
       const newUser = new UserModel({

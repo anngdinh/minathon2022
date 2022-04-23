@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Container, Row, Col } from "react-grid-system";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 const User = {
@@ -37,6 +37,19 @@ export default function Create() {
             image: e.target.files[0],
         });
     };
+    // let categories;
+    const [categories, setCategories] = useState({});
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/category")
+            .then((res) => {
+                // categories = res.data;
+                console.log(res.data);
+                setCategories(res.data)
+                console.log(( categories));
+            })
+            .catch((error) => console.log(error));
+    }, []);
 
     const handleClick = () => {
         const formData = new FormData();
@@ -84,6 +97,9 @@ export default function Create() {
                                     <option value="clothing">Clothing</option>
                                     <option value="funiture">Funiture</option>
                                     <option value="shoe">Shoe</option>
+                                    {categories.map((cate, index) => (
+                                        <option value={cate._id}>{cate.name}</option>
+                                    ))}
                                 </Form.Select>
                             </Col>
                         </Row>
