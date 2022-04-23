@@ -1,67 +1,67 @@
-import React ,{ useState} from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import styled from 'styled-components'
 import { Breadcrumbs, Link, Typography } from '@mui/material'
 import Header from '../Header.js'
 import Footer from '../Footer.js'
-function Home (){
+function Home() {
     const [targetNavItem, setTargetNavItem] = useState('donation')
     const [targetNavChildItem, setTargetNavChildItem] = useState('')
     const changeNavItem = (item) => {
         switch (item) {
-        case 'my-account':
-        case 'donation':
-        case 'product':
-        case 'received':
-            setTargetNavChildItem('')
-            setTargetNavItem(item)
-            break;
-        case 'my-event':
-        case 'participated':
-            setTargetNavItem('event')
-            setTargetNavChildItem(item)
-            break;
-        default:
-            break;
+            case 'my-account':
+            case 'donation':
+            case 'product':
+            case 'received':
+                setTargetNavChildItem('')
+                setTargetNavItem(item)
+                break;
+            case 'my-event':
+            case 'participated':
+                setTargetNavItem('event')
+                setTargetNavChildItem(item)
+                break;
+            default:
+                break;
         }
     }
-    const [show,setShow]=useState(true);
-    function More_info(){
+    const [show, setShow] = useState(true);
+    function More_info() {
         setShow(!show);
     }
 
-    function RenderProduct (){
-        return(
-            <div class="card" style={{maxWidth: '400px'}}>
-                <img class="card-img-top img-fluid" src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="Card" style={{maxHeight:"300px"}}/>
+    function RenderProduct() {
+        return (
+            <div class="card" style={{ maxWidth: '400px' }}>
+                <img class="card-img-top img-fluid" src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="Card" style={{ maxHeight: "300px" }} />
                 <div class="card-body">
                     <h4 class="card-title">Giày Nike</h4>
-                    {!show ? 
-                    <div >
-                        <p class="card-text text-truncate" style={{maxWidth: "400px"}}>Some example text some example text. Some example text some example text. Some example text some example text.</p>
-                        <p class="card-text" > Address: HCMUT </p>
-                        <div class="d-flex justify-content-between"><p class="card-text" > In_stock: 1 </p>
-                        <svg onClick={More_info} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                            <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                        </svg>
+                    {!show ?
+                        <div >
+                            <p class="card-text text-truncate" style={{ maxWidth: "400px" }}>Some example text some example text. Some example text some example text. Some example text some example text.</p>
+                            <p class="card-text" > Address: HCMUT </p>
+                            <div class="d-flex justify-content-between"><p class="card-text" > In_stock: 1 </p>
+                                <svg onClick={More_info} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                    <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </div>
                         </div>
-                    </div>
-                    :
+                        :
 
-                    <div>
-                        <p class="card-text" >Some example text some example text. Some example text some example text. Some example text some example text.</p>
-                        <p class="card-text" > Address: HCMUT </p>
-                        <p class="card-text" > Phone: 0123456789 </p>
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text" > In_stock: 1 </p>
-                            <svg onClick={More_info} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z"/>
-                                <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
-                            </svg>
+                        <div>
+                            <p class="card-text" >Some example text some example text. Some example text some example text. Some example text some example text.</p>
+                            <p class="card-text" > Address: HCMUT </p>
+                            <p class="card-text" > Phone: 0123456789 </p>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text" > In_stock: 1 </p>
+                                <svg onClick={More_info} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z" />
+                                    <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                                </svg>
+                            </div>
                         </div>
-                    </div>
                     }
                     <p class="text-center"><a href="#" class="btn btn-primary ">Cho em xin</a></p>
                 </div>
@@ -69,40 +69,40 @@ function Home (){
         )
     }
 
-    return(
+    return (
         <>
-        <Header/>
-        <Container>
-            <Head>
-                <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
-                <Link underline="hover" color="inherit" href="/">
-                    Home
-                </Link>
-                <Typography color="text.primary">My Account</Typography>
-                </Breadcrumbs>
-                <h2 style={{marginTop: '10px'}}>My Account</h2>
-            </Head>
-            <Row>
-            <NavBox>
-                <NavItem className={targetNavItem==='my-account'?'active':''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
-                <NavItem className={targetNavItem==='donation'?'active':''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
-                <NavItem className={targetNavItem==='received'?'active':''} onClick={() => changeNavItem('received')}>Received</NavItem>
-                <NavItem className={targetNavItem==='event'?'active':''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
-                    <NavChildItem className={targetNavChildItem==='my-event'?'active':''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
-                    <NavChildItem className={targetNavChildItem==='participated'?'active':''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
-                <NavItem className={targetNavItem==='product'?'active':''} onClick={() => changeNavItem('product')}>Product</NavItem>
-                    <NavChildItem className={targetNavChildItem==='product1'?'active':''} onClick={() => changeNavItem('product1')}>Product1</NavChildItem>
-                    <NavChildItem className={targetNavChildItem==='product2'?'active':''} onClick={() => changeNavItem('product2')}>Product2</NavChildItem>
-                    <NavChildItem className={targetNavChildItem==='product3'?'active':''} onClick={() => changeNavItem('product3')}>Product3</NavChildItem>
-                    <NavChildItem className={targetNavChildItem==='product4'?'active':''} onClick={() => changeNavItem('product4')}>Product4</NavChildItem>
-                <Hr/>
-            </NavBox>
+            <Header />
+            <Container>
+                <Head>
+                    <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
+                        <Link underline="hover" color="inherit" href="/">
+                            Home
+                        </Link>
+                        <Typography color="text.primary">My Account</Typography>
+                    </Breadcrumbs>
+                    <h2 style={{ marginTop: '10px' }}>My Account</h2>
+                </Head>
+                <Row>
+                    <NavBox>
+                        <NavItem className={targetNavItem === 'my-account' ? 'active' : ''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
+                        <NavItem className={targetNavItem === 'donation' ? 'active' : ''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
+                        <NavItem className={targetNavItem === 'received' ? 'active' : ''} onClick={() => changeNavItem('received')}>Received</NavItem>
+                        <NavItem className={targetNavItem === 'event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
+                        <NavChildItem className={targetNavChildItem === 'my-event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
+                        <NavChildItem className={targetNavChildItem === 'participated' ? 'active' : ''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
+                        <NavItem className={targetNavItem === 'product' ? 'active' : ''} onClick={() => changeNavItem('product')}>Product</NavItem>
+                        <NavChildItem className={targetNavChildItem === 'product1' ? 'active' : ''} onClick={() => changeNavItem('product1')}>Product1</NavChildItem>
+                        <NavChildItem className={targetNavChildItem === 'product2' ? 'active' : ''} onClick={() => changeNavItem('product2')}>Product2</NavChildItem>
+                        <NavChildItem className={targetNavChildItem === 'product3' ? 'active' : ''} onClick={() => changeNavItem('product3')}>Product3</NavChildItem>
+                        <NavChildItem className={targetNavChildItem === 'product4' ? 'active' : ''} onClick={() => changeNavItem('product4')}>Product4</NavChildItem>
+                        <Hr />
+                    </NavBox>
 
-            <RenderProduct/>
-            <RenderProduct/>
-            </Row>
-        </Container>
-        <Footer/>
+                    <RenderProduct />
+                    <RenderProduct />
+                </Row>
+            </Container>
+            <Footer />
         </>
     )
 }

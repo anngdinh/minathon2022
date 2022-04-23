@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import User from './User/User';
 import Create from './Product/Create';
+import Home from './Home/Home';
+
 import {
   BrowserRouter,
   Routes,
@@ -27,6 +29,7 @@ root.render(
       </Route>
       <Route path="user/" element={<User />} />
       <Route path="create/" element={<Create />} />
+      <Route path="home/" element={<Home />} />
     </Routes>
   </BrowserRouter>
   </React.StrictMode>
