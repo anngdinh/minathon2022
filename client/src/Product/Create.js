@@ -15,7 +15,9 @@ const User = {
 }
 
 export default function Create() {
-
+    const [product, setProduct] = useState({
+        
+    })
     return (
         <div>
             <Title>
