@@ -35,7 +35,7 @@ class ProductController {
               res.json(ProductModel);
             }
           }
-        );
+        ).populate("categoryId", "name");
       } catch (error) {
         console.log(error);
       }
