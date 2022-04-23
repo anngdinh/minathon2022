@@ -64,7 +64,7 @@ const ProductItem = styled.div`
 const Img = styled.img`
     max-width: 180px;
     max-height: 180px;
-    padding
+    /* padding */
 `
 const Content = styled.div`
   margin: 5px 10px;
