@@ -1,9 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import axios from "axios";
 
 export default function Event(props) {
+    const idUser = "626401f7e60d778ed7fa4557"
     const [show, setshow] = useState(false)
     const [stateResgister, setStateResgister] = useState(false)
     const [reload, setReload] = useState(false)
@@ -11,11 +12,19 @@ export default function Event(props) {
     function More_info(){
         setshow(!show)
     }
+    useEffect(() => {
+        for(let i=0;i<numMember;i++){
+            if(props.item.listJoin[i]._id == idUser){
+                setStateResgister(true);
+                break;
+            }
+        }
+    },[])
     const increaseMember = ()=>{
         setNumMember(numMember+1);
         setStateResgister(!stateResgister);
         const formData = new FormData();
-        formData.append("idUser", "626401f7e60d778ed7fa4557");
+        formData.append("idUser",idUser );
         axios.put("http://localhost:5000/event/member?id=" + props.item._id, formData);
     }
     const reduceMember = ()=>{
