@@ -11,9 +11,9 @@ const Footer = () => {
         <Infor>
           <InforTitle>Team members</InforTitle>
           <InforItem>Nguyen Dinh An</InforItem>
-          <InforItem>Cao Thanh Binh</InforItem>
+          <InforItem>Nguyen Thuc Quan</InforItem>
           <InforItem>Nguyen Tran Hoang</InforItem>
-          <InforItem>Nguyen Thanh Long</InforItem>
+          <InforItem>Le Ngoc Tien</InforItem>
         </Infor>
         <Infor>
           <InforTitle>Address</InforTitle>
@@ -56,7 +56,7 @@ const Footer = () => {
 }
 
 const Row = styled.div`
-  background-color: black;
+  background-color: #002c5c;
   width: 100%;
   min-height: 320px;
   display: flex;

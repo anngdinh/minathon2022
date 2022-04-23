@@ -6,10 +6,38 @@ export default function ProductList({ list, type }) {
 
   return (
     <div>
-      <Title>My Donation</Title>
+      <Title>{type===1 ? 'My Donation': 'Received'}</Title>
       <Line />
 
-      <Card>
+      <Card style={{margin:"10px 5px"}}>
+        <ProductItem>
+          <Img
+            alt="171x180"
+            src={list[0].img}
+          />
+
+          <Content>
+            <TitleProduct>
+              <p className='title'>{list[0].title}</p>
+              <div className='state'>
+
+                {/* <Status>
+                  <i class="fa-check-circle"></i> in stock
+                </Status> */}
+              </div>
+
+            </TitleProduct>
+
+            <Badge bg="secondary">{list[0].category}</Badge>
+
+            <Description>
+              {list[0].description}
+            </Description>
+          </Content>
+        </ProductItem>
+      </Card>
+
+      <Card style={{margin:"10px 5px"}}>
         <ProductItem>
           <Img
             alt="171x180"
@@ -55,11 +83,12 @@ const Line = styled.hr`
     background-color:#CACDD8;
     border-radius: 10%;
 `
+
 const ProductItem = styled.div`
     display: flex;
     flex-direction: row;
     padding: 10px;
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `
 const Img = styled.img`
     max-width: 180px;
