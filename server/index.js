@@ -37,12 +37,12 @@ mongoose
 //     useTempFiles: true,
 //   })
 // );
+app.use(cors());
 app.use("/public/", express.static("public"));
 app.use("/user", UserRoute);
 app.use("/product", ProductRoute);
 app.use("/transition", TransitionRoute);
 app.use("/event", EventRoute);
-app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/category", CategoryRoute);

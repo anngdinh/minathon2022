@@ -46,6 +46,8 @@ class TransitionController {
             res.json(TransitionModel);
           }
         })
+          .populate("productId", "title")
+          .populate("userIdReceive", "name")
           .clone()
           .catch(function (err) {
             console.log(err);

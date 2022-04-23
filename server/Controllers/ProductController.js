@@ -35,7 +35,7 @@ class ProductController {
               res.json(ProductModel);
             }
           }
-        );
+        ).populate("categoryId", "name");
       } catch (error) {
         console.log(error);
       }
@@ -49,6 +49,7 @@ class ProductController {
             res.json(ProductModel);
           }
         })
+          .populate("categoryId", "name")
           .clone()
           .catch(function (err) {
             console.log(err);
