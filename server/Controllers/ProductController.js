@@ -2,9 +2,10 @@ const express = require("express");
 let ProductModel = require("../Model/ProductModel");
 class ProductController {
   async createProduct(req, res) {
-    // console.log(req.file);
-    // console.log(req.body.img);
-    // console.log(req);
+    console.log(req.file);
+    console.log(req.files);
+    console.log(req.body.img);
+    console.log(req.body);
     const { categoryId, img, description, title, userId, amount } = req.body;
     try {
       const newProduct = new ProductModel({
