@@ -11,5 +11,10 @@ EventRoute.put(
   upload.single("img"),
   EventController.updateEventMember
 );
+EventRoute.put(
+  "/removemember/",
+  upload.single("img"),
+  EventController.updateEventRemoveMember
+);
 
 module.exports = EventRoute;
