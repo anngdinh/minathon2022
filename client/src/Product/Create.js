@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Container, Row, Col } from "react-grid-system";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-
+import axios from "axios";
 const User = {
     username: "Long",
     password: "123456",
@@ -31,24 +31,55 @@ export default function Create() {
             [e.target.name]: e.target.value,
         });
     };
+    const handleChangImg = (e) => {
+        setNewproduct({
+            ...newProduct,
+            image: e.target.files[0],
+        });
+    };
+
+    const handleClick = () => {
+        const formData = new FormData();
+        formData.append("categoryId", "6263ab9deb735b01400c03cc");
+        formData.append("description", newProduct.description);
+        formData.append("title", newProduct.title);
+        formData.append("userId", "6263a3b447b5920d614a6f7f");
+        formData.append("amount", newProduct.amount);
+        formData.append("img", newProduct.image);
+        axios.post("http://localhost:5000/product", formData);
+    };
     return (
         <div>
-            <Title>
-                Create Donation
-            </Title>
+            <Title>Create Donation</Title>
             <Container style={{ maxWidth: "900px" }}>
-                <form encType='multipart/form-data' method="POST">
+                <form encType="multipart/form-data" method="POST">
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Title</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" onChange={onChangeField} name="title" value={title} /></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Title</NameInput>
+                            </Col>
+                            <Col lg={9.5}>
+                                <Input
+                                    type="text"
+                                    onChange={onChangeField}
+                                    name="title"
+                                    value={title}
+                                />
+                            </Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Category</NameInput></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Category</NameInput>
+                            </Col>
                             <Col lg={9.5}>
-                                <Form.Select aria-label="Default select example" onChange={onChangeField} name="category" value={category}>
+                                <Form.Select
+                                    aria-label="Default select example"
+                                    onChange={onChangeField}
+                                    name="category"
+                                    value={category}
+                                >
                                     {/* <option>Open this select menu</option> */}
                                     <option value="clothing">Clothing</option>
                                     <option value="funiture">Funiture</option>
@@ -59,34 +90,70 @@ export default function Create() {
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Image</NameInput></Col>
-                            <Col lg={9.5}><input type="file" onChange={onChangeField} name="image" value={image} /></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Image</NameInput>
+                            </Col>
+                            <Col lg={9.5}>
+                                <input
+                                    type="file"
+                                    onChange={handleChangImg}
+                                    name="image"
+                                // value={image}
+                                />
+                            </Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Description</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" onChange={onChangeField} name="description" value={description} /></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Description</NameInput>
+                            </Col>
+                            <Col lg={9.5}>
+                                <Input
+                                    type="text"
+                                    onChange={onChangeField}
+                                    name="description"
+                                    value={description}
+                                />
+                            </Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Amount</NameInput></Col>
-                            <Col lg={9.5}><Input type="number" onChange={onChangeField} name="amount" value={amount} /></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Amount</NameInput>
+                            </Col>
+                            <Col lg={9.5}>
+                                <Input
+                                    type="number"
+                                    onChange={onChangeField}
+                                    name="amount"
+                                    value={amount}
+                                />
+                            </Col>
                         </Row>
                     </ContainerInput>
                     <ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Address</NameInput></Col>
-                            <Col lg={9.5}><Input type="text" onChange={onChangeField} name="address" value={address} /></Col>
+                            <Col lg={2.5}>
+                                <NameInput>Address</NameInput>
+                            </Col>
+                            <Col lg={9.5}>
+                                <Input
+                                    type="text"
+                                    onChange={onChangeField}
+                                    name="address"
+                                    value={address}
+                                />
+                            </Col>
                         </Row>
                     </ContainerInput>
 
-                    <ButtonSave onClick={() => { console.log(newProduct); }}>Create</ButtonSave>
+                    <ButtonSave onClick={handleClick}>Create</ButtonSave>
                 </form>
             </Container>
 
-
+            {/* <ButtonSave>Create</ButtonSave> */}
         </div>
     );
 }
