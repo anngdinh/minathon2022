@@ -54,7 +54,13 @@ class TransitionController {
             res.json(TransitionModel);
           }
         })
-          .populate("productId", "title")
+          .populate({
+            path: "productId",
+            populate: {
+              path: "userId",
+              model: "User",
+            },
+          })
           .populate("userIdReceive", "name")
           .clone()
           .catch(function (err) {
@@ -124,5 +130,34 @@ class TransitionController {
   // test(req, res) {
   //   res.send({ succes: "cc" });
   // }
+
+  async getGive(req, res) {
+    try {
+      console.log("cc");
+      await TransitionModel.find({}, function (err, TransitionModel) {
+        if (err) {
+          console.log(err);
+          res.json({ message: `ID: ${req.query.id} not found` });
+        } else {
+          console.log(TransitionModel);
+          res.json(TransitionModel);
+        }
+      })
+        .populate({
+          path: "productId",
+          populate: {
+            path: "userId",
+            model: "User",
+          },
+        })
+        .populate("userIdReceive")
+        .find({
+          "userId._id": req.query.id,
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
+
 module.exports = new TransitionController();
