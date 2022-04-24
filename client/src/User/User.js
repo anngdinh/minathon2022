@@ -47,7 +47,7 @@ const listSample = [
 
 const User = () => {
 
-  const [targetNavItem, setTargetNavItem] = useState('tree')
+  const [targetNavItem, setTargetNavItem] = useState('my-account')
   const [targetNavChildItem, setTargetNavChildItem] = useState('')
   const changeNavItem = (item) => {
     switch (item) {

@@ -73,7 +73,7 @@ const Header = () => {
               <Dropdown.Menu>
                 {/* <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
                 <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item> */}
-                <Dropdown.Item href="/user">My Account</Dropdown.Item>
+                <Dropdown.Item onClick={() => navigate("/user", { replace: true })}>My Account</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
               </Dropdown.Menu>
