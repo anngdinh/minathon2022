@@ -89,7 +89,7 @@ class ProductController {
         { _id: id },
         {
           categoryId: categoryId,
-          img: img,
+          img: [`http://localhost:5000/${req.file.path}`],
           description: description,
           title: title,
           userId: userId,

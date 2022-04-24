@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const Container = styled.div`
@@ -8,6 +8,12 @@ const Container = styled.div`
 `;
 const Register = () => {
   let navigate = useNavigate();
+  console.log("?????????");
+  useEffect(() => {
+    if (localStorage.getItem("userId")) {
+      navigate("../home", { replace: true });
+    }
+  });
   const [data, setData] = useState({
     username: "",
     password: "",

@@ -8,6 +8,10 @@ const Container = styled.div`
 `;
 const Login = () => {
   let navigate = useNavigate();
+  console.log("cc");
+  if (localStorage.getItem("userId")) {
+    navigate("../home", { replace: true });
+  }
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -27,7 +31,7 @@ const Login = () => {
     axios.post("http://localhost:5000/user/find/", formData).then((res) => {
       if (res.data.user !== null) {
         localStorage.setItem("userId", res.data.user._id);
-        navigate("../", { replace: true });
+        navigate("../home", { replace: true });
       }
     });
   };
