@@ -70,7 +70,8 @@ const User = () => {
   const my_id = localStorage.getItem("userId");
   const [receive, setReceive] = useState(listSample);
   const [donate, setDonate] = useState(listSample);
-  var numDonate;
+  const [numDonate, setNumDonate] = useState(0);
+  // var numDonate;
   useEffect(() => {
     axios
       .get("http://localhost:5000/transition?id=" + my_id)
@@ -90,7 +91,7 @@ const User = () => {
           return item.productId.userId._id === my_id
         })
         console.log("ds: ", ds);
-        numDonate = ds.length
+        setNumDonate (ds.length)
         console.log("numDonate: ", numDonate)
         setDonate(ds)
       })
@@ -128,7 +129,7 @@ const User = () => {
             {targetNavItem === 'my-account' && <Information />}
             {targetNavItem === 'donation' && <ProductList list={donate} type={1} />}
             {targetNavItem === 'received' && <ProductList list={receive} type={2} />}
-            {targetNavItem === 'tree' && <RenderFruit number={0} />}
+            {targetNavItem === 'tree' && <RenderFruit number={numDonate} />}
           </Content>
         </Row>
       </Container>
