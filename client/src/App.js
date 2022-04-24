@@ -10,8 +10,8 @@ function App() {
   return (
     <>
     {/* <Header/> */}
-    {/* <RenderFruit/> */}
-    <RenderEvent/>
+    <RenderFruit/>
+    {/* <RenderEvent/> */}
     {/* <Footer/> */}
     </>
   );

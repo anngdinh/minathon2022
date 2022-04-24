@@ -10,7 +10,7 @@ const RenderFruit = () => {
     // image.src = "..\images\tree-not-remove.jpg"
     image.src = "https://img-new.cgtrader.com/items/2052037/7399282e12/tree-cartoon-3d-model-obj-mtl-3ds-fbx.jpg"
     useEffect(() => {
-        catImage.src = "https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-6/279167198_1104456960402585_5534591758677890258_n.jpg?_nc_cat=101&ccb=1-5&_nc_sid=730e14&_nc_ohc=1J3CeeRsJFgAX-jBCrg&_nc_ht=scontent.fsgn1-1.fna&oh=00_AT-G-hnJMlzKFNdFydkCA01ljPA-wCG42zpcNRg2gx2UsA&oe=626A30D9"
+        catImage.src = "https://th.bing.com/th/id/R.5596867853d81f1ccec3c38e6e1c6242?rik=IqHrDA4nesaR9A&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2f9i4%2fLrB%2f9i4LrBneT.jpg&ehk=WL32i5FXwrq6ybwtlURj63h5DK1Kt2QX4ysKHnnWCEs%3d&risl=&pid=ImgRaw&r=0"
         const ctx = canvas.current.getContext("2d")
         ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight)
         console.log(catImage.naturalWidth)
