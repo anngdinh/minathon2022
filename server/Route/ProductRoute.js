@@ -7,6 +7,6 @@ ProductRoute.post("/", upload.single("img"), ProductController.createProduct);
 
 ProductRoute.get("/", ProductController.getProduct);
 // ProductRoute.get("/:id", ProductController.getSingleProduct);
-ProductRoute.put("/", ProductController.updateProduct);
+ProductRoute.put("/", upload.single("img"), ProductController.updateProduct);
 
 module.exports = ProductRoute;

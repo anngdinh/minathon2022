@@ -6,6 +6,6 @@ UserRoute.post("/find", upload.single("img"), UserController.findUser);
 UserRoute.post("/", upload.single("img"), UserController.createUser);
 UserRoute.get("/", UserController.getUser);
 // UserRoute.get("/:id", UserController.getSingleUser);
-UserRoute.put("/", UserController.updateUser);
+UserRoute.put("/", upload.single("img"), UserController.updateUser);
 
 module.exports = UserRoute;
