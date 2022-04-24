@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react'
 import axios from "axios";
 
 export default function Event(props) {
-    const idUser = "626401f7e60d778ed7fa4557"
+    const idUser = localStorage.getItem("userId");
     const [show, setshow] = useState(false)
     const [stateResgister, setStateResgister] = useState(false)
     const [reload, setReload] = useState(false)
