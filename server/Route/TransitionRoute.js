@@ -12,6 +12,13 @@ TransitionRoute.get(
   upload.single("img"),
   TransitionController.getTransition
 );
+
+TransitionRoute.get(
+  "/give",
+  upload.single("img"),
+  TransitionController.getGive
+);
+
 // TransitionRoute.get("/:id", TransitionController.getSingleTransition);
 // TransitionRoute.put("/", TransitionController.updateTransition);
 
