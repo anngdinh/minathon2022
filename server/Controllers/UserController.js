@@ -15,7 +15,7 @@ class UserController {
         point: 0,
       });
       await newUser.save();
-      res.send({ success: true, User: newUser });
+      res.send({ success: true, user: newUser });
     } catch (error) {
       console.log(error);
     }
