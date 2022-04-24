@@ -106,6 +106,7 @@ class EventController {
           startTime: startTime,
           endTime: endTime,
           title: title,
+          img: `http://localhost:5000/${req.file.path}`,
         },
         { new: true }
       );
