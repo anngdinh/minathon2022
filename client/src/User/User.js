@@ -70,12 +70,7 @@ const User = () => {
   const my_id = localStorage.getItem("userId");
   const [receive, setReceive] = useState(listSample);
   const [donate, setDonate] = useState(listSample);
-<<<<<<< HEAD
-  const [numDonate, setNumDonate] = useState(0);
-  // var numDonate;
-=======
   const [num_donate, setNum_donate] = useState(0);
->>>>>>> 71171163d4333367f28f36990a337fa89cf5c992
   useEffect(() => {
     axios
       .get("http://localhost:5000/transition?id=" + my_id)
@@ -95,13 +90,8 @@ const User = () => {
           return item.userId._id === my_id
         })
         console.log("ds: ", ds);
-<<<<<<< HEAD
-        setNumDonate (ds.length)
-        console.log("numDonate: ", numDonate)
-=======
         setNum_donate(ds.lenght)
         // console.log("numDonate: ", numDonate)
->>>>>>> 71171163d4333367f28f36990a337fa89cf5c992
         setDonate(ds)
       })
       .catch((error) => console.log(error));
