@@ -9,7 +9,7 @@ import { Label } from "@mui/icons-material";
 function App() {
   return (
     <>
-      {/* <Header/> */}
+      <Header />
       {/* <RenderFruit />/ */}
       <RenderEvent />
       {/* <Footer/> */}
