@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Breadcrumbs, Link, Typography } from '@mui/material'
 import Header from '../Header.js'
 import Footer from '../Footer.js'
-import { Card, Col, Button, Modal } from 'react-bootstrap';
+import { Card, Col, Button, Modal, Row, Badge } from 'react-bootstrap';
 import axios from "axios";
 function Home() {
     const [targetNavItem, setTargetNavItem] = useState('donation')
@@ -28,44 +28,64 @@ function Home() {
                 break;
         }
     }
-    // const [products, setProducts] = useState([]);
-    // useEffect(() => {
-    //     axios
-    //         .get("http://localhost:5000/product")
-    //         .then((res) => {
-    //             // categories = res.data;
-    //             console.log("res data : ", res.data);
-    //             setProducts(res.data);
-    //             // console.log(products);
-    //         })
-    //         .catch((error) => console.log(error));
-    // }, []);
-    const products = [
-        {
-            "_id": "6263fce2a35a4f231a39503c",
-            "categoryId": "6263ab9deb735b01400c03cc",
-            "img": [
-                "http://localhost:5000/public\\2022-04-23T13-19-30.651ZIMG_20220311_171916_495.png"
-            ],
-            "description": "san pham pro",
-            "title": "test title",
-            "userId": "6263a3b447b5920d614a6f7f",
-            "amount": 12000,
-            "__v": 0
-        },
-        {
-            "_id": "62641a1d415e893814701555",
-            "categoryId": "6263aba5eb735b01400c03ce",
-            "img": [
-                "http://localhost:5000/public\\2022-04-23T15-24-13.930ZMongoDB.PNG"
-            ],
-            "description": "test",
-            "title": "test2",
-            "userId": "6263a3b447b5920d614a6f7f",
-            "amount": 18000,
-            "__v": 0
-        }
-    ]
+    const [products, setProducts] = useState([]);
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        let user;
+        axios
+            .get("http://localhost:5000/user")
+            .then((res) => {
+                console.log("users: ", res.data)
+                setUsers(res.data);
+                user = res.data
+            })
+            .catch((error) => console.log(error));
+
+        axios
+            .get("http://localhost:5000/product")
+            .then((res) => {
+                console.log("products: ", res.data)
+
+                let p = res.data
+                p.map((product) => {
+                    const result = user.find(({ _id }) => _id === product.userId);
+                    product.userName = result.name;
+                });
+
+                console.log("pp ", p)
+                setProducts(p)
+            })
+            .catch((error) => console.log(error));
+
+
+        // getName();
+    }, []);
+    // const products = [
+    //     {
+    //         "_id": "6263fce2a35a4f231a39503c",
+    //         "categoryId": "6263ab9deb735b01400c03cc",
+    //         "img": [
+    //             "http://localhost:5000/public\\2022-04-23T13-19-30.651ZIMG_20220311_171916_495.png"
+    //         ],
+    //         "description": "san pham pro",
+    //         "title": "test title",
+    //         "userId": "6263a3b447b5920d614a6f7f",
+    //         "amount": 12000,
+    //         "__v": 0
+    //     },
+    //     {
+    //         "_id": "62641a1d415e893814701555",
+    //         "categoryId": "6263aba5eb735b01400c03ce",
+    //         "img": [
+    //             "http://localhost:5000/public\\2022-04-23T15-24-13.930ZMongoDB.PNG"
+    //         ],
+    //         "description": "test",
+    //         "title": "test2",
+    //         "userId": "6263a3b447b5920d614a6f7f",
+    //         "amount": 18000,
+    //         "__v": 0
+    //     }
+    // ]
 
 
     const [show, setShow] = useState(false);
@@ -74,6 +94,21 @@ function Home() {
     const handleClose = () => {
         // setShow(false)
         setShow(false)
+    };
+
+    const handleTransaction = (p_id, u_id) => {
+        const form = new FormData();
+
+        console.log("an", p_id, u_id);
+        form.append("productId", p_id);
+        form.append("userIdReceive", u_id);
+        console.log("form",form )
+        axios
+            .post("http://localhost:5000/transition", form)
+            .then((res) => {
+                console.log("x",res.data)
+            })
+            .catch((error) => console.log(error));
     };
     const handleShow = (e) => {
         // setModal(product);
@@ -95,7 +130,7 @@ function Home() {
                     </Breadcrumbs>
                     <h2 style={{ marginTop: '10px' }}>My Account</h2>
                 </Head>
-                <Row>
+                <div className='d-flex flex-row '>
                     <NavBox>
                         <NavItem className={targetNavItem === 'my-account' ? 'active' : ''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
                         <NavItem className={targetNavItem === 'donation' ? 'active' : ''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
@@ -111,35 +146,40 @@ function Home() {
                         <Hr />
                     </NavBox>
 
-                    {products.map(product => (
+                    {/* {products.map(product => (
                         <div></div>
-                    ))}
+                    ))} */}
 
                     <Container>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <Card.Img variant="top" src="https://grist.org/wp-content/uploads/2013/10/sneakers-crop.jpg" />
-                                    <Card.Body>
-                                        <div className='d-flex flex-row align-items-center justify-content-between'>
-                                            <Card.Title>An old Shoes</Card.Title>
-                                            <div>12/2/2001</div>
-                                        </div>
-                                        <div className='d-flex flex-row align-items-center justify-content-between'>
-                                            <Card.Text>
-                                                Nguyễn Đình An
-                                            </Card.Text>
-                                            <Button variant="primary" data-toggle="modal" data-target=".bd-example-modal-lg">More detail</Button>
 
-                                        </div>
+                        <Row xs={1} md={2} className="g-4">
+                            {products.map((product) => (
+                                <Col key={product._id}>
+                                    <Card>
+                                        <Card.Img variant="top" src={product.img} />
+                                        <Card.Body>
+                                            <div className='d-flex flex-row align-items-center justify-content-between'>
+                                                <Card.Title>{product.title}</Card.Title>
+                                                <div>12/2/2001</div>
+                                            </div>
+                                            <div className='d-flex flex-row align-items-center justify-content-between'>
+                                                <Card.Text>
+                                                    Donator: {product.userName}
+                                                </Card.Text>
 
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                            <Col>2 of 2</Col>
+                                                {/* <Button variant="primary" data-toggle="modal" data-target=".bd-example-modal-lg">More detail</Button> */}
+                                                <Button variant="primary" onClick={() => { setModal(product); setShow(true) }} name={product._id}>
+                                                    {product.title}
+                                                </Button>
+                                            </div>
+
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
                         </Row>
                     </Container>
-                </Row>
+                </div>
             </Container>
             <Footer />
 
@@ -158,28 +198,27 @@ function Home() {
 
             <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{modal.title}</Modal.Title>
+                    <Modal.Title>Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Card>
-                        <Card.Img variant="top" src={modal.img[0]} />
+                        <Card.Img variant="top" src={modal.img} />
                         <Card.Body>
                             <div className='d-flex flex-row align-items-center justify-content-between'>
-                                <Card.Title>An old Shoes</Card.Title>
+                                <Card.Title>{modal.title}</Card.Title>
                                 <div>12/2/2001</div>
                             </div>
 
+                            <Badge bg="secondary">{modal.categoryId ? modal.categoryId.name : ""}</Badge>
+
                             <Card.Text>
-                                Nguyễn Đình An
+                                Donator: {modal.userName}
                             </Card.Text>
 
                             <Card.Text>
-                                {modal.description}
-                                {modal.amount}
-                                {modal.userId}
-                                {modal.categoryId}
+                                Description: {modal.description}
                             </Card.Text>
-
+                            {/* {modal.amount} */}
 
 
                         </Card.Body>
@@ -189,7 +228,7 @@ function Home() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={() => handleTransaction(modal._id, modal.userId)}>
                         Get it
                     </Button>
                 </Modal.Footer>
@@ -211,11 +250,11 @@ const Hr = styled.hr`
   height: 0.2px;
   background-image: -webkit-linear-gradient(#d6d6d6, #d6d6d6, #d6d6d6);
 `
-const Row = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-`
+// const Row = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: row;
+// `
 const NavChildItem = styled.div`
   padding: 10px 0;
   margin-left: 30px;
