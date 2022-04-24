@@ -134,15 +134,18 @@ class TransitionController {
   async getGive(req, res) {
     try {
       console.log("cc");
-      await TransitionModel.find({}, function (err, TransitionModel) {
-        if (err) {
-          console.log(err);
-          res.json({ message: `ID: ${req.query.id} not found` });
-        } else {
-          console.log(TransitionModel);
-          res.json(TransitionModel);
+      await TransitionModel.find(
+        { "productId.userId._id": req.query.id },
+        function (err, TransitionModel) {
+          if (err) {
+            console.log(err);
+            res.json({ message: `ID: ${req.query.id} not found` });
+          } else {
+            console.log(TransitionModel);
+            res.json(TransitionModel);
+          }
         }
-      })
+      )
         .populate({
           path: "productId",
           populate: {
@@ -152,8 +155,9 @@ class TransitionController {
         })
         .populate("userIdReceive")
         .find({
-          "userId._id": req.query.id,
-        });
+          "productId.userId._id": req.query.id,
+        })
+        .clone();
     } catch (error) {
       console.log(error);
     }

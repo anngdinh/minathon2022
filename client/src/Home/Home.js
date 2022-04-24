@@ -7,14 +7,16 @@ import Header from '../Header.js'
 import Footer from '../Footer.js'
 import { Card, Col, Button, Modal, Row, Badge } from 'react-bootstrap';
 import axios from "axios";
+import Swal from 'sweetalert2';
+
+
 function Home() {
-    const [targetNavItem, setTargetNavItem] = useState('donation')
+    const [targetNavItem, setTargetNavItem] = useState('donate')
     const [targetNavChildItem, setTargetNavChildItem] = useState('')
     const changeNavItem = (item) => {
         switch (item) {
-            case 'my-account':
-            case 'donation':
-            case 'product':
+            case 'donate':
+            case 'archived':
             case 'received':
                 setTargetNavChildItem('')
                 setTargetNavItem(item)
@@ -29,37 +31,19 @@ function Home() {
         }
     }
     const [products, setProducts] = useState([]);
-    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
-        let user;
-        axios
-            .get("http://localhost:5000/user")
-            .then((res) => {
-                console.log("users: ", res.data)
-                setUsers(res.data);
-                user = res.data
-            })
-            .catch((error) => console.log(error));
-
         axios
             .get("http://localhost:5000/product")
             .then((res) => {
                 console.log("products: ", res.data)
-
-                let p = res.data
-                p.map((product) => {
-                    const result = user.find(({ _id }) => _id === product.userId);
-                    product.userName = result.name;
-                });
-
-                console.log("pp ", p)
-                setProducts(p)
+                setProducts(res.data)
             })
             .catch((error) => console.log(error));
 
 
         // getName();
-    }, []);
+    }, [loading]);
     // const products = [
     //     {
     //         "_id": "6263fce2a35a4f231a39503c",
@@ -96,19 +80,45 @@ function Home() {
         setShow(false)
     };
 
-    const handleTransaction = (p_id, u_id) => {
-        const form = new FormData();
+    const handleTransaction = (p_id, donate_id, amount) => {
+        const my_id = localStorage.getItem("userId");
+        const form2 = new FormData();
+        form2.append("amount", amount - 1);
+        // form2.append("amount", amount - 1);
+        axios
+            .put("http://localhost:5000/product?id=" + p_id, form2)
+            .then((res) => {
+                console.log("change amount", res.data)
+            })
+            .catch((error) => console.log(error));
 
-        console.log("an", p_id, u_id);
+        const form = new FormData();
+        // console.log("an", p_id, my_id);
         form.append("productId", p_id);
-        form.append("userIdReceive", u_id);
-        console.log("form",form )
+        form.append("userIdReceive", my_id);
+        console.log("form", form)
         axios
             .post("http://localhost:5000/transition", form)
             .then((res) => {
-                console.log("x",res.data)
+                console.log("x", res.data)
+
+                Swal.fire(
+                    'Successfully!',
+                    'Your request is pendding!',
+                    'success'
+                )
+                handleClose();
             })
             .catch((error) => console.log(error));
+
+        axios
+            .put("http://localhost:5000/user/point?id=" + donate_id, form)
+            .then((res) => {
+                console.log("point increase: ", res.data)
+            })
+            .catch((error) => console.log(error));
+
+        setLoading((pre) => !pre)
     };
     const handleShow = (e) => {
         // setModal(product);
@@ -120,30 +130,38 @@ function Home() {
     return (
         <>
             <Header />
+            <SubNav>
+                <SubNavItem>Getting support</SubNavItem>
+                <SubNavItem>How you can help</SubNavItem>
+                <SubNavItem>Donate</SubNavItem>
+                <SubNavItem>Play and win</SubNavItem>
+                <SubNavItem>About us</SubNavItem>
+            </SubNav>
+
             <Container>
                 <Head>
                     <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
                         <Link underline="hover" color="inherit" href="/">
                             Home
                         </Link>
-                        <Typography color="text.primary">My Account</Typography>
+                        <Typography color="text.primary">Home</Typography>
                     </Breadcrumbs>
-                    <h2 style={{ marginTop: '10px' }}>My Account</h2>
+                    <h2 style={{ marginTop: '10px' }}>Home</h2>
                 </Head>
                 <div className='d-flex flex-row '>
                     <NavBox>
-                        <NavItem className={targetNavItem === 'my-account' ? 'active' : ''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
-                        <NavItem className={targetNavItem === 'donation' ? 'active' : ''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
+                        <NavItem className={targetNavItem === 'donate' ? 'active' : ''} onClick={() => changeNavItem('donate')}>Donate</NavItem>
+                        <NavItem className={targetNavItem === 'archived' ? 'active' : ''} onClick={() => changeNavItem('archived')}>Archived</NavItem>
                         <NavItem className={targetNavItem === 'received' ? 'active' : ''} onClick={() => changeNavItem('received')}>Received</NavItem>
                         <NavItem className={targetNavItem === 'event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
                         <NavChildItem className={targetNavChildItem === 'my-event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
                         <NavChildItem className={targetNavChildItem === 'participated' ? 'active' : ''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
-                        <NavItem className={targetNavItem === 'product' ? 'active' : ''} onClick={() => changeNavItem('product')}>Product</NavItem>
+                        {/* <NavItem className={targetNavItem === 'product' ? 'active' : ''} onClick={() => changeNavItem('product')}>Product</NavItem>
                         <NavChildItem className={targetNavChildItem === 'product1' ? 'active' : ''} onClick={() => changeNavItem('product1')}>Product1</NavChildItem>
                         <NavChildItem className={targetNavChildItem === 'product2' ? 'active' : ''} onClick={() => changeNavItem('product2')}>Product2</NavChildItem>
                         <NavChildItem className={targetNavChildItem === 'product3' ? 'active' : ''} onClick={() => changeNavItem('product3')}>Product3</NavChildItem>
                         <NavChildItem className={targetNavChildItem === 'product4' ? 'active' : ''} onClick={() => changeNavItem('product4')}>Product4</NavChildItem>
-                        <Hr />
+                        <Hr /> */}
                     </NavBox>
 
                     {/* {products.map(product => (
@@ -153,7 +171,7 @@ function Home() {
                     <Container>
 
                         <Row xs={1} md={2} className="g-4">
-                            {products.map((product) => (
+                            {products.map((product) => product.amount <= 0 ? <></> : (
                                 <Col key={product._id}>
                                     <Card>
                                         <Card.Img variant="top" src={product.img} />
@@ -164,12 +182,16 @@ function Home() {
                                             </div>
                                             <div className='d-flex flex-row align-items-center justify-content-between'>
                                                 <Card.Text>
-                                                    Donator: {product.userName}
+                                                    Donator: {product.userId ? product.userId.name : ""}
                                                 </Card.Text>
+                                                {/* <Card.Text>
+                                                    Amount: {product.amount}
+                                                </Card.Text> */}
 
                                                 {/* <Button variant="primary" data-toggle="modal" data-target=".bd-example-modal-lg">More detail</Button> */}
                                                 <Button variant="primary" onClick={() => { setModal(product); setShow(true) }} name={product._id}>
-                                                    {product.title}
+                                                    {/* {product.title} */}
+                                                    More details
                                                 </Button>
                                             </div>
 
@@ -188,11 +210,11 @@ function Home() {
             </Button> */}
 
 
-            {products.map(product => (
+            {/* {products.map(product => (
                 <Button variant="primary" onClick={() => { setModal(product); setShow(true) }} name={product._id}>
                     {product.title}
                 </Button>
-            ))}
+            ))} */}
 
 
 
@@ -212,9 +234,11 @@ function Home() {
                             <Badge bg="secondary">{modal.categoryId ? modal.categoryId.name : ""}</Badge>
 
                             <Card.Text>
-                                Donator: {modal.userName}
+                                Donator: {modal.userId ? modal.userId.name : ""}
                             </Card.Text>
-
+                            <Card.Text>
+                                Amount: {modal.amount}
+                            </Card.Text>
                             <Card.Text>
                                 Description: {modal.description}
                             </Card.Text>
@@ -228,11 +252,12 @@ function Home() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleTransaction(modal._id, modal.userId)}>
+                    <Button variant="primary" onClick={() => handleTransaction(modal._id, modal.userId._id, modal.amount)}>
                         Get it
                     </Button>
                 </Modal.Footer>
             </Modal>
+
 
         </>
     )
@@ -277,6 +302,7 @@ const NavBox = styled.div`
   width: 20%;
   padding: 5px 15px 5px 0;
   height: fit-content;
+  margin-right: 20px;
 `
 const Head = styled.div`
   display: flex;
@@ -289,4 +315,26 @@ const Container = styled.div`
   width: 80%;
   margin: 0 auto;
 `
+
+const SubNav = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 1px solid gray;
+`;
+const SubNavItem = styled.button`
+  border: none;
+  background-color: white;
+  padding: 10px;
+  flex: auto 1 1;
+  border-right: 1px solid gray;
+  border-left: 1px solid gray;
+  :hover {
+    background-color: #7cd2ff;
+  }
+
+  color: #002c5c;
+  font-weight: bold;
+  font-size: 22px;
+`;
 export default Home

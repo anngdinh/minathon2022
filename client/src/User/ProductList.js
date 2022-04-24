@@ -2,68 +2,46 @@ import styled from 'styled-components'
 import { Card, CardGroup, Figure, Badge } from 'react-bootstrap';
 
 export default function ProductList({ list, type }) {
-// type 1 for donation, type 2 for received
-
+  // type 1 for donation, type 2 for received
+  // console()
   return (
     <div>
-      <Title>{type===1 ? 'My Donation': 'Received'}</Title>
+      <Title>{type === 1 ? 'My Donation' : 'Received'}</Title>
       <Line />
 
-      <Card style={{margin:"10px 5px"}}>
-        <ProductItem>
-          <Img
-            alt="171x180"
-            src={list[0].img}
-          />
+      {list.map((item) => (
+        <Card style={{ margin: "10px 5px" }}>
+          <ProductItem>
+            <Img
+              alt="171x180"
+              src={item.productId.img[0]}
+            />
 
-          <Content>
-            <TitleProduct>
-              <p className='title'>{list[0].title}</p>
-              <div className='state'>
+            <Content>
+              <TitleProduct>
+                <p className='title'>{item.productId.title}</p>
+                <div className='state'>
 
-                {/* <Status>
+                  {/* <Status>
                   <i class="fa-check-circle"></i> in stock
                 </Status> */}
-              </div>
+                </div>
 
-            </TitleProduct>
+              </TitleProduct>
 
-            <Badge bg="secondary">{list[0].category}</Badge>
+              <Badge bg="secondary">{item.productId.categoryId}</Badge>
+              <Description>
+                {type === 1 ? ('Receiver :'  + item.productId.userId.name) : ("Donator: " + item.productId.userId.name)}
+              </Description>
+              <Description>
+                {item.productId.description}
+              </Description>
+            </Content>
+          </ProductItem>
+        </Card>
+      ))}
 
-            <Description>
-              {list[0].description}
-            </Description>
-          </Content>
-        </ProductItem>
-      </Card>
 
-      <Card style={{margin:"10px 5px"}}>
-        <ProductItem>
-          <Img
-            alt="171x180"
-            src={list[0].img}
-          />
-
-          <Content>
-            <TitleProduct>
-              <p className='title'>{list[0].title}</p>
-              <div className='state'>
-
-                {/* <Status>
-                  <i class="fa-check-circle"></i> in stock
-                </Status> */}
-              </div>
-
-            </TitleProduct>
-
-            <Badge bg="secondary">{list[0].category}</Badge>
-
-            <Description>
-              {list[0].description}
-            </Description>
-          </Content>
-        </ProductItem>
-      </Card>
 
       {/* {list[0].address}
       {type} */}

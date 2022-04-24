@@ -3,6 +3,10 @@ import { Container, Row, Col } from "react-grid-system";
 import { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Header from "../Header";
+import Footer from "../Footer";
+
 const User = {
   username: "Long",
   password: "123456",
@@ -16,6 +20,7 @@ const User = {
 };
 
 export default function Create() {
+  let navigate = useNavigate();
   const [newProduct, setNewproduct] = useState({
     title: "",
     amount: "",
@@ -56,13 +61,15 @@ export default function Create() {
     formData.append("categoryId", newProduct.category);
     formData.append("description", newProduct.description);
     formData.append("title", newProduct.title);
-    formData.append("userId", "6263a3b447b5920d614a6f7f");
+    formData.append("userId", localStorage.getItem("userId"));
     formData.append("amount", newProduct.amount);
     formData.append("img", newProduct.image);
     axios.post("http://localhost:5000/product", formData);
+    navigate("../home", { replace: true });
   };
   return (
     <div>
+      <Header></Header>
       <Title>Create Donation</Title>
       <Container style={{ maxWidth: "900px" }}>
         <form encType="multipart/form-data" method="POST">
@@ -116,7 +123,7 @@ export default function Create() {
                   type="file"
                   onChange={handleChangImg}
                   name="image"
-                  // value={image}
+                // value={image}
                 />
               </Col>
             </Row>
@@ -157,6 +164,8 @@ export default function Create() {
       </Container>
 
       {/* <ButtonSave>Create</ButtonSave> */}
+
+      <Footer></Footer>
     </div>
   );
 }
