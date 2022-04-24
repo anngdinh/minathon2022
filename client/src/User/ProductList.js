@@ -14,12 +14,12 @@ export default function ProductList({ list, type }) {
           <ProductItem>
             <Img
               alt="171x180"
-              src={item.productId.img[0]}
+              src={type === 1 ? item.img[0] : item.productId.img[0]}
             />
 
             <Content>
               <TitleProduct>
-                <p className='title'>{item.productId.title}</p>
+                <p className='title'>{type === 1 ? item.title : item.productId.title}</p>
                 <div className='state'>
 
                   {/* <Status>
@@ -29,12 +29,12 @@ export default function ProductList({ list, type }) {
 
               </TitleProduct>
 
-              <Badge bg="secondary">{item.productId.categoryId}</Badge>
+              <Badge bg="secondary">{type === 1 ? item.categoryId.name : item.productId.categoryId}</Badge>
               <Description>
-                {type === 1 ? ('Receiver :'  + item.productId.userId.name) : ("Donator: " + item.productId.userId.name)}
+                {type === 1 ? ("") : ("Donator: " + item.productId.userId.name)}
               </Description>
               <Description>
-                {item.productId.description}
+                {type === 1 ? item.description : item.productId.description}
               </Description>
             </Content>
           </ProductItem>

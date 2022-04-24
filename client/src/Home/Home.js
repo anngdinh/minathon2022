@@ -8,9 +8,10 @@ import Footer from '../Footer.js'
 import { Card, Col, Button, Modal, Row, Badge } from 'react-bootstrap';
 import axios from "axios";
 import Swal from 'sweetalert2';
-
+import { useNavigate } from "react-router-dom";
 
 function Home() {
+    let navigate = useNavigate();
     const [targetNavItem, setTargetNavItem] = useState('donate')
     const [targetNavChildItem, setTargetNavChildItem] = useState('')
     const changeNavItem = (item) => {
@@ -130,13 +131,13 @@ function Home() {
     return (
         <>
             <Header />
-            <SubNav>
-                <SubNavItem>Getting support</SubNavItem>
+            {/* <SubNav>
+                <SubNavItem onClick={() => navigate("/home", { replace: true })}>Getting support</SubNavItem>
                 <SubNavItem>How you can help</SubNavItem>
-                <SubNavItem>Donate</SubNavItem>
-                <SubNavItem>Play and win</SubNavItem>
+                <SubNavItem onClick={() => navigate("/create", { replace: true })}>Donate</SubNavItem>
+                <SubNavItem onClick={() => navigate("/event", { replace: true })}>Events</SubNavItem>
                 <SubNavItem>About us</SubNavItem>
-            </SubNav>
+            </SubNav> */}
 
             <Container>
                 <Head>

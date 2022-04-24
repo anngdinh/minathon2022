@@ -53,9 +53,7 @@ const Header = () => {
                   Best Seller
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">
                   My Wish List
@@ -73,9 +71,9 @@ const Header = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
-                <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">My Account</Dropdown.Item>
+                {/* <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item> */}
+                <Dropdown.Item href="/user">My Account</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
               </Dropdown.Menu>
@@ -86,13 +84,13 @@ const Header = () => {
         </Container>
       </Navbar>
 
-      {/* <SubNav>
-        <SubNavItem>Getting support</SubNavItem>
+      <SubNav>
+        <SubNavItem onClick={() => navigate("/home", { replace: true })}>Getting support</SubNavItem>
         <SubNavItem>How you can help</SubNavItem>
-        <SubNavItem>Donate</SubNavItem>
-        <SubNavItem>Play and win</SubNavItem>
+        <SubNavItem onClick={() => navigate("/create", { replace: true })}>Donate</SubNavItem>
+        <SubNavItem onClick={() => navigate("/event", { replace: true })}>Events</SubNavItem>
         <SubNavItem>About us</SubNavItem>
-      </SubNav> */}
+      </SubNav>
     </>
   );
 };
