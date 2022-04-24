@@ -20,7 +20,7 @@ class TransitionController {
     if (req.query.id !== undefined) {
       try {
         console.log("cc");
-        await TransitionModel.findOne(
+        await TransitionModel.find(
           { userIdReceive: req.query.id },
           function (err, TransitionModel) {
             if (err) {
