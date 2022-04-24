@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Event(props) {
-  const { events, setEvents } = props;
+  const { loading, setLoading } = props;
   const idUser = localStorage.getItem("userId");
   const [show, setshow] = useState(false);
   const [stateResgister, setStateResgister] = useState(false);
@@ -30,7 +30,7 @@ export default function Event(props) {
       "http://localhost:5000/event/member?id=" + props.item._id,
       formData
     );
-    setEvents([...events]);
+    setLoading((pre) => !pre);
   };
   const reduceMember = () => {
     setNumMember(numMember - 1);
@@ -42,7 +42,7 @@ export default function Event(props) {
       "http://localhost:5000/event/removemember?id=" + props.item._id,
       formData
     );
-    setEvents([...events]);
+    setLoading((pre) => !pre);
   };
   return (
     // <div class="container mt-3">
@@ -165,7 +165,7 @@ export default function Event(props) {
                       <tr>
                         <td>{index + 1}</td>
                         <td>{member.name}</td>
-                        <td>30/07/2022</td>
+                        <td>{Math.floor(Math.random() * 23) + 1}/04/2022</td>
                       </tr>
                     );
                   })}

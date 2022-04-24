@@ -4,24 +4,25 @@ import axios from "axios";
 import NewEvent from "./createNewEvent";
 export default function RenderEvent() {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
       .get("http://localhost:5000/event")
       .then((res) => {
         // categories = res.data;
         console.log(res.data);
-        setEvents(res.data);
+        setEvents([...res.data]);
         console.log(events);
       })
       .catch((error) => console.log(error));
-  }, [events]);
+  }, [loading]);
   return (
     <div class="container mt-3">
       <div class="d-flex justify-content-end">
-        <NewEvent />
+        <NewEvent loading={loading} setLoading={setLoading} />
       </div>
       {events.map((item) => (
-        <Event events={events} setEvents={setEvents} item={item} />
+        <Event loading={loading} setLoading={setLoading} item={item} />
       ))}
     </div>
   );
