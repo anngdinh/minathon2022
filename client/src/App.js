@@ -9,10 +9,10 @@ import { Label } from "@mui/icons-material";
 function App() {
   return (
     <>
-      <Header />
-      {/* <RenderFruit />/ */}
-      <RenderEvent />
-      {/* <Footer/> */}
+    {/* <Header/> */}
+    <RenderFruit/>
+    {/* <RenderEvent/> */}
+    {/* <Footer/> */}
     </>
   );
 }
