@@ -7,6 +7,7 @@ import User from "./User/User";
 import Create from "./Product/Create";
 import Home from "./Home/Home";
 import RenderEvent from "./Events/RenderEvent";
+import RenderFruit from "./Events/RenderFruit";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -34,6 +35,7 @@ root.render(
         <Route path="create/" element={<Create />} />
         <Route path="home/" element={<Home />} />
         <Route path="event/" element={<RenderEvent />} />
+        <Route path="tree/" element={<RenderFruit />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

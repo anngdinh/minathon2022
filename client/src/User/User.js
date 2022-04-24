@@ -10,6 +10,7 @@ import Information from './Information'
 import ProductList from './ProductList'
 import Header from '../Header'
 import Footer from '../Footer'
+import RenderFruit from '../Events/RenderFruit'
 import axios from "axios";
 const listSample = [
   {
@@ -46,13 +47,14 @@ const listSample = [
 
 const User = () => {
 
-  const [targetNavItem, setTargetNavItem] = useState('received')
+  const [targetNavItem, setTargetNavItem] = useState('tree')
   const [targetNavChildItem, setTargetNavChildItem] = useState('')
   const changeNavItem = (item) => {
     switch (item) {
       case 'my-account':
       case 'donation':
       case 'received':
+      case 'tree':
         setTargetNavChildItem('')
         setTargetNavItem(item)
         break;
@@ -68,6 +70,7 @@ const User = () => {
   const my_id = localStorage.getItem("userId");
   const [receive, setReceive] = useState(listSample);
   const [donate, setDonate] = useState(listSample);
+  var numDonate;
   useEffect(() => {
     axios
       .get("http://localhost:5000/transition?id=" + my_id)
@@ -87,6 +90,8 @@ const User = () => {
           return item.productId.userId._id === my_id
         })
         console.log("ds: ", ds);
+        numDonate = ds.length
+        console.log("numDonate: ", numDonate)
         setDonate(ds)
       })
       .catch((error) => console.log(error));
@@ -115,6 +120,7 @@ const User = () => {
             <NavItem className={targetNavItem === 'event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
             <NavChildItem className={targetNavChildItem === 'my-event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
             <NavChildItem className={targetNavChildItem === 'participated' ? 'active' : ''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
+            <NavItem className={targetNavItem === 'tree' ? 'active' : ''} onClick={() => changeNavItem('tree')}>Charity Tree</NavItem>
             <Hr />
           </NavBox>
           <Content>
@@ -122,6 +128,7 @@ const User = () => {
             {targetNavItem === 'my-account' && <Information />}
             {targetNavItem === 'donation' && <ProductList list={donate} type={1} />}
             {targetNavItem === 'received' && <ProductList list={receive} type={2} />}
+            {targetNavItem === 'tree' && <RenderFruit number={0} />}
           </Content>
         </Row>
       </Container>
