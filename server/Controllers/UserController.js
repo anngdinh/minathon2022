@@ -131,6 +131,31 @@ class UserController {
       res.json({ message: "Error" });
     }
   }
+
+  async updateUserPoint(req, res) {
+    try {
+      // console.log(req.body);
+      const id = req.query.id;
+
+      let updateUser = await UserModel.updateOne(
+        { _id: id },
+        {
+          $inc: { point: 1 },
+        },
+        { new: true }
+      );
+      if (!updateUser) {
+        res.status(401).json({ success: false, msg: "User not found" });
+      }
+      res.send({
+        success: true,
+        user: updateUser,
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({ message: "Error" });
+    }
+  }
   // test(req, res) {
   //   res.send({ succes: "cc" });
   // }
