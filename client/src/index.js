@@ -1,37 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import User from './User/User';
-import Create from './Product/Create';
-import Home from './Home/Home';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import User from "./User/User";
+import Create from "./Product/Create";
+import Home from "./Home/Home";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./Components/Login";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        {/* <Route path="teams" element={<Teams />}>
+      <Routes>
+        <Route path="/" element={<App />}>
+          {/* <Route path="teams" element={<Teams />}>
           <Route path=":teamId" element={<Team />} />
           <Route path="new" element={<NewTeamForm />} />
           <Route index element={<LeagueStandings />} />
         </Route> */}
-      </Route>
-      <Route path="user/" element={<User />} />
-      <Route path="create/" element={<Create />} />
-      <Route path="home/" element={<Home />} />
-    </Routes>
-  </BrowserRouter>
+        </Route>
+        <Route path="login/" element={<Login />} />
+
+        <Route path="user/" element={<User />} />
+        <Route path="create/" element={<Create />} />
+        <Route path="home/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
