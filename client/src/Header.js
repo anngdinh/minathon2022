@@ -26,7 +26,7 @@ const Header = () => {
       >
         <Container style={{}}>
           <Navbar.Brand
-            href="#home"
+            href="/home"
             className="d-flex flex-row align-items-center"
           >
             <img
@@ -81,18 +81,18 @@ const Header = () => {
               </Dropdown.Menu>
             </Dropdown>
           </NavIcon>
-          <Button variant="primary">Become a Donator</Button>
+          <Button variant="primary" onClick={() => navigate("../create", { replace: true })}>Become a Donator</Button>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         </Container>
       </Navbar>
 
-      <SubNav>
+      {/* <SubNav>
         <SubNavItem>Getting support</SubNavItem>
         <SubNavItem>How you can help</SubNavItem>
         <SubNavItem>Donate</SubNavItem>
         <SubNavItem>Play and win</SubNavItem>
         <SubNavItem>About us</SubNavItem>
-      </SubNav>
+      </SubNav> */}
     </>
   );
 };

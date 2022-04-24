@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 // import Footer from '../Footer'
 // import Header from '../Header'
 import styled from 'styled-components'
@@ -10,20 +10,43 @@ import Information from './Information'
 import ProductList from './ProductList'
 import Header from '../Header'
 import Footer from '../Footer'
-const Products = [
+import axios from "axios";
+const listSample = [
   {
-      "img": "https://www.greenqueen.com.hk/wp-content/uploads/2021/07/Rental-Fashion-Causes-More-Emissions-Than-Throwing-Clothes-Away.jpg",
-      "address": "ktx khu A",
-      "category": "Clothing",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-      "amount": 1,
-      "title": "Hoang ĐBRR"
+    "_id": "6264c085fc7a883e9d74bfa0",
+    "productId": {
+      "_id": "6263fce2a35a4f231a39503c",
+      "categoryId": "6263ab9deb735b01400c03cc",
+      "img": [
+        "http://localhost:5000/public\\2022-04-23T13-19-30.651ZIMG_20220311_171916_495.png"
+      ],
+      "description": "--",
+      "title": "--",
+      "userId": {
+        "_id": "6263a3b447b5920d614a6f7f",
+        "name": "--",
+        "phone": "0123456789",
+        "point": 3,
+        "__v": 0
+      },
+      "amount": 3,
+      "__v": 0
+    },
+    "userIdReceive": {
+      "_id": "6263a4a0a980a36bced49cae",
+      "name": "--",
+      "phone": "03584848",
+      "point": 0,
+      "__v": 0
+    },
   }
+
 ]
 
+
 const User = () => {
-  
-  const [targetNavItem, setTargetNavItem] = useState('donation')
+
+  const [targetNavItem, setTargetNavItem] = useState('received')
   const [targetNavChildItem, setTargetNavChildItem] = useState('')
   const changeNavItem = (item) => {
     switch (item) {
@@ -42,39 +65,67 @@ const User = () => {
         break;
     }
   }
+  const my_id = localStorage.getItem("userId");
+  const [receive, setReceive] = useState(listSample);
+  const [donate, setDonate] = useState(listSample);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/transition?id=" + my_id)
+      .then((res) => {
+        console.log("receive: ", res.data)
+        setReceive(res.data)
+      })
+      .catch((error) => console.log(error));
+
+    var d;
+    axios
+      .get("http://localhost:5000/transition")
+      .then((res) => {
+        console.log("donate: ", res.data)
+        d = res.data
+        const ds = d.filter((item) => {
+          return item.productId.userId._id === my_id
+        })
+        console.log("ds: ", ds);
+        setDonate(ds)
+      })
+      .catch((error) => console.log(error));
+
+    // getName();
+  }, []);
 
   return (
     <>
-    <Header/>
-    <Container>
-      <Head>
-        <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
-            Home
-          </Link>
-          <Typography color="text.primary">My Account</Typography>
-        </Breadcrumbs>
-        <h2 style={{marginTop: '10px'}}>My Account</h2>
-      </Head>
-      <Row>
-        <NavBox>
-          <NavItem className={targetNavItem==='my-account'?'active':''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
-          <NavItem className={targetNavItem==='donation'?'active':''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
-          <NavItem className={targetNavItem==='received'?'active':''} onClick={() => changeNavItem('received')}>Received</NavItem>
-          <NavItem className={targetNavItem==='event'?'active':''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
-          <NavChildItem className={targetNavChildItem==='my-event'?'active':''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
-          <NavChildItem className={targetNavChildItem==='participated'?'active':''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
-          <Hr/>
-        </NavBox>
-        <Content>
-          
-          {targetNavItem==='my-account' && <Information/>}
-          {targetNavItem==='donation' && <ProductList list={Products} type={1} />}
-          {targetNavItem==='received' && <ProductList list={Products} type={2} />}
-        </Content>
-      </Row>
-    </Container>
-    <Footer/>
+      <Header />
+      <Container>
+        <Head>
+          <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              Home
+            </Link>
+            <Typography color="text.primary">My Account</Typography>
+          </Breadcrumbs>
+          <h2 style={{ marginTop: '10px' }}>My Account</h2>
+        </Head>
+        <Row>
+          <NavBox>
+            <NavItem className={targetNavItem === 'my-account' ? 'active' : ''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
+            <NavItem className={targetNavItem === 'donation' ? 'active' : ''} onClick={() => changeNavItem('donation')}>Donation</NavItem>
+            <NavItem className={targetNavItem === 'received' ? 'active' : ''} onClick={() => changeNavItem('received')}>Received</NavItem>
+            <NavItem className={targetNavItem === 'event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>Event</NavItem>
+            <NavChildItem className={targetNavChildItem === 'my-event' ? 'active' : ''} onClick={() => changeNavItem('my-event')}>My Event</NavChildItem>
+            <NavChildItem className={targetNavChildItem === 'participated' ? 'active' : ''} onClick={() => changeNavItem('participated')}>Participated</NavChildItem>
+            <Hr />
+          </NavBox>
+          <Content>
+
+            {targetNavItem === 'my-account' && <Information />}
+            {targetNavItem === 'donation' && <ProductList list={donate} type={1} />}
+            {targetNavItem === 'received' && <ProductList list={receive} type={2} />}
+          </Content>
+        </Row>
+      </Container>
+      <Footer />
     </>
   )
 }
