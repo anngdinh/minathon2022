@@ -10,8 +10,10 @@ import RenderEvent from "./Events/RenderEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./Components/Login";
-import Register from "./Components/Register";
+// import Login from "./Components/Login";
+import Login from "./Login";
+// import Register from "./Components/Register";
+import Register from "./Register";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -6,11 +6,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import RenderFruit from "./Events/RenderFruit";
 import { Label } from "@mui/icons-material";
+import Login from './Login'
+import Register from './Register'
 function App() {
   return (
     <>
     {/* <Header/> */}
-    <RenderFruit number={10}/>
+    {/* <RenderFruit number={10}/> */}
+    <Register/>
     {/* <RenderEvent/> */}
     {/* <Footer/> */}
     </>
