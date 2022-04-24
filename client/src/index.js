@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import User from "./User/User";
 import Create from "./Product/Create";
 import Home from "./Home/Home";
-
+import RenderEvent from "./Events/RenderEvent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -29,6 +29,7 @@ root.render(
         <Route path="user/" element={<User />} />
         <Route path="create/" element={<Create />} />
         <Route path="home/" element={<Home />} />
+        <Route path="event/" element={<RenderEvent />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

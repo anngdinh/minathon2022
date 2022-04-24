@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     {/* <Header/> */}
-    <RenderFruit/>
+    <RenderFruit number={10}/>
     {/* <RenderEvent/> */}
     {/* <Footer/> */}
     </>
