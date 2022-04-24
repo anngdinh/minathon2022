@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 
 export default function Register() {
   let navigate = useNavigate();
-  console.log("?????????");
   useEffect(() => {
     if (localStorage.getItem("userId")) {
       navigate("../home", { replace: true });
