@@ -21,7 +21,7 @@ class TransitionController {
       try {
         console.log("cc");
         await TransitionModel.findOne(
-          { _id: req.query.id },
+          { userIdReceive: req.query.id },
           function (err, TransitionModel) {
             if (err) {
               console.log(err);
@@ -31,7 +31,15 @@ class TransitionController {
               res.json(TransitionModel);
             }
           }
-        );
+        )
+          .populate({
+            path: "productId",
+            populate: {
+              path: "userId",
+              model: "User",
+            },
+          })
+          .populate("userIdReceive");
       } catch (error) {
         console.log(error);
       }
