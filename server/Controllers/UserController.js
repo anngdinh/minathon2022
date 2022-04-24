@@ -60,6 +60,28 @@ class UserController {
       }
     }
   }
+
+  async findUser(req, res) {
+    try {
+      const { username, password } = req.body;
+      // console.log("cc");
+      await UserModel.findOne(
+        { username: username, password: password },
+        function (err, UserModel) {
+          if (err) {
+            console.log(err);
+            res.json({ message: `ID: ${req.query.id} not found` });
+          } else {
+            console.log(UserModel);
+            res.json({ success: true, user: UserModel });
+          }
+        }
+      ).clone();
+    } catch (error) {
+      console.log(error);
+      res.json({ success: "??", user: UserModel });
+    }
+  }
   // async getSingleUser(req, res) {
   //   console.log(req.query);
   //   try {
