@@ -84,13 +84,13 @@ const Header = () => {
         </Container>
       </Navbar>
 
-      {/* <SubNav>
-        <SubNavItem>Getting support</SubNavItem>
+      <SubNav>
+        <SubNavItem onClick={() => navigate("/home", { replace: true })}>Getting support</SubNavItem>
         <SubNavItem>How you can help</SubNavItem>
-        <SubNavItem>Donate</SubNavItem>
-        <SubNavItem>Play and win</SubNavItem>
+        <SubNavItem onClick={() => navigate("/create", { replace: true })}>Donate</SubNavItem>
+        <SubNavItem onClick={() => navigate("/event", { replace: true })}>Events</SubNavItem>
         <SubNavItem>About us</SubNavItem>
-      </SubNav> */}
+      </SubNav>
     </>
   );
 };

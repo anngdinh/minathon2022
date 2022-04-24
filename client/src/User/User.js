@@ -128,7 +128,7 @@ const User = () => {
             {targetNavItem === 'my-account' && <Information />}
             {targetNavItem === 'donation' && <ProductList list={donate} type={1} />}
             {targetNavItem === 'received' && <ProductList list={receive} type={2} />}
-            {targetNavItem === 'tree' && <RenderFruit number={num_donate} />}
+            {targetNavItem === 'tree' && <RenderFruit number={4} />}
           </Content>
         </Row>
       </Container>
