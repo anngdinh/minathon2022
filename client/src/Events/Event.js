@@ -2,8 +2,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "../Header";
-import Footer from "../Footer";
 
 export default function Event(props) {
   const { loading, setLoading } = props;
@@ -48,8 +46,6 @@ export default function Event(props) {
   };
   return (
     // <div class="container mt-3">
-    // <>
-    //   <Header></Header>
 
       <div class="mt-3">
         <div class="card shadow-sm p-3bg-white rounded">
@@ -122,7 +118,7 @@ export default function Event(props) {
                       class="btn btn-primary"
                       onClick={increaseMember}
                     >
-                      Dang ky
+                      Register
                     </button>
                   ) : (
                     <button
@@ -131,7 +127,7 @@ export default function Event(props) {
                       class="btn btn-success"
                       onClick={reduceMember}
                     >
-                      Da dang ky
+                      Registed
                     </button>
                   )}
                   <p class="text-end mb-0">
@@ -161,7 +157,7 @@ export default function Event(props) {
                     <tr>
                       <th>STT</th>
                       <th>Name</th>
-                      <th>Thoi gian dang ky</th>
+                      <th>Time</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -181,7 +177,5 @@ export default function Event(props) {
           </div>
         </div>
       </div>
-    //   <Footer></Footer>
-    // </>
   );
 }
