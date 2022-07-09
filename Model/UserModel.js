@@ -15,13 +15,6 @@ let User = new Schema({
   numGive: {
     type: Number,
   },
-  username: {
-    type: String,
-    unique: true,
-  },
-  password: {
-    type: String,
-  },
   point: {
     type: Number,
   },

@@ -3,15 +3,13 @@ let UserModel = require("../Model/UserModel");
 class UserController {
   async createUser(req, res) {
     console.log(req.body);
-    const { name, phone, username, password } = req.body;
+    const { name, phone } = req.body;
     try {
       const newUser = new UserModel({
         name: name,
         phone: phone,
         numReceive: 0,
         numGive: 0,
-        username: username,
-        password: password,
         point: 0,
       });
       await newUser.save();
