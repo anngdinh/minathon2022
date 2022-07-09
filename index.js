@@ -38,9 +38,9 @@ mongoose
 //   })
 // );
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use("/public/", express.static("public"));
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use("/user", UserRoute);
 app.use("/product", ProductRoute);
 app.use("/transition", TransitionRoute);
