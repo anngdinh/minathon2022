@@ -38,13 +38,13 @@ mongoose
 //   })
 // );
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use("/public/", express.static("public"));
 app.use("/user", UserRoute);
 app.use("/product", ProductRoute);
 app.use("/transition", TransitionRoute);
 app.use("/event", EventRoute);
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 app.use("/category", CategoryRoute);
 app.use("/", function (req, res) {
   res.sendFile(path.join(__dirname + "/Home.html"));

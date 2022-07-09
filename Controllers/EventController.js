@@ -3,7 +3,7 @@ let EventModel = require("../Model/EventModel");
 class EventController {
   async createEvent(req, res) {
     console.log("path", `http://localhost:5000/${req.file.path}`);
-    const { userID, description, address, startTime, endTime, title } =
+    const { userID, description, address, startTime, endTime, title , maxNumRegister} =
       req.body;
     try {
       const newEvent = new EventModel({
@@ -16,6 +16,7 @@ class EventController {
         endTime: endTime,
         title: title,
         img: `http://localhost:5000/${req.file.path}`,
+        maxNumRegister: maxNumRegister,
         date: new Date(),
       });
       await newEvent.save();

@@ -19,44 +19,34 @@ class UserController {
     }
   }
   async getUser(req, res) {
-    console.log(req.query.id);
-    if (req.query.id !== undefined) {
-      try {
-        console.log("cc");
-        await UserModel.findOne(
-          { _id: req.query.id },
-          function (err, UserModel) {
-            if (err) {
-              console.log(err);
-              res.json({ message: `ID: ${req.query.id} not found` });
-            } else {
-              console.log(UserModel);
-              res.json(UserModel);
-            }
+	// console.log(res.query.id);
+    console.log("get user", req.body);
+        const {customerId, name} = req.body;
+        if (customerId !== undefined && name !== undefined) {
+            try {
+              const user = await UserModel.findOne({ customerId: customerId });
+              if (user) {
+                  res.send({ exist: true });
+              } else {
+                  try {
+                      const newUser = new UserModel({
+                          customerId: customerId,
+                          name: name,
+                          numReceive: 0,
+                          numGive: 0,
+                          point: 0,
+                      });
+                      await newUser.save();
+                      res.send({ success: true, UserModel: newUser });
+                  } catch (error) {
+                      console.log(error);
+                      res.send({ success: false });
+                  }
+              }
+          } catch (error) {
+              console.log(error);
           }
-        );
-      } catch (error) {
-        console.log(error);
       }
-    } else {
-      try {
-        await UserModel.find(function (err, UserModel) {
-          if (err) {
-            console.log(err);
-            throw err;
-          } else {
-            // console.log(typeof account);
-            res.json(UserModel);
-          }
-        })
-          .clone()
-          .catch(function (err) {
-            console.log(err);
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    }
   }
 
   async findUser(req, res) {

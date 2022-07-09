@@ -23,6 +23,9 @@ let Product = new Schema({
   amount: {
     type: Number,
   },
+  status:{
+    type: String,
+  }
 });
 
 module.exports = mongoose.model("Product", Product, "Product");

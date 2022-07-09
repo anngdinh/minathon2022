@@ -3,11 +3,10 @@ const Schema = mongoose.Schema;
 let User = new Schema({
   name: {
     type: String,
-    unique: true,
+    unique: false,
   },
-  phone: {
+  customerId:{
     type: String,
-    unique: true,
   },
   numReceive: {
     type: Number,

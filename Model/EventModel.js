@@ -20,10 +20,15 @@ let Event = new Schema({
   numRegister: {
     type: Number,
   },
+  maxNumRegister:{
+    type: Number,
+  },
   startTime: String,
   endTime: String,
   title: String,
-  img: String,
+  img: {
+    type: [String],
+  },
   date: {
     type: Date,
   },

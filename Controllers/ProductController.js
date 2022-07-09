@@ -12,6 +12,7 @@ class ProductController {
         title: title,
         userId: userId,
         amount: amount,
+        status: "Chưa nhận"
       });
       await newProduct.save();
       res.send({ success: true, Product: newProduct });
