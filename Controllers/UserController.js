@@ -20,7 +20,7 @@ class UserController {
   }
   async getUser(req, res) {
 	// console.log(res.query.id);
-    console.log("get user", req.body);
+    console.log("get user", req);
         const {customerId, name} = req.body;
         if (customerId !== undefined && name !== undefined) {
             try {
