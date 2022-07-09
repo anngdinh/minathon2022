@@ -39,6 +39,7 @@ mongoose
 // );
 app.use(cors());
 app.use("/public/", express.static("public"));
+app.use("/tiki-validation-code/", express.static("tiki-validation-code"));
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use("/user", UserRoute);
