@@ -6,7 +6,7 @@ EventRoute.post("/", upload.single("img"), EventController.createEvent);
 EventRoute.get("/", upload.single("img"), EventController.getEvent);
 // EventRoute.get("/:id", EventController.getSingleEvent);
 EventRoute.put("/", upload.single("img"), EventController.updateEvent);
-EventRoute.put(
+EventRoute.post(
   "/member/",
   upload.single("img"),
   EventController.updateEventMember
