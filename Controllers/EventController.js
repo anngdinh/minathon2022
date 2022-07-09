@@ -2,7 +2,7 @@ const express = require("express");
 let EventModel = require("../Model/EventModel");
 class EventController {
   async createEvent(req, res) {
-    console.log("path", `http://localhost:5000/${req.file.path}`);
+    console.log("path", `https://we--share.herokuapp.com/${req.file.path}`);
     const { userID, description, address, startTime, endTime, title , maxNumRegister} =
       req.body;
     try {
@@ -15,7 +15,7 @@ class EventController {
         startTime: startTime,
         endTime: endTime,
         title: title,
-        img: `http://localhost:5000/${req.file.path}`,
+        img: `https://we--share.herokuapp.com/${req.file.path}`,
         maxNumRegister: maxNumRegister,
         date: new Date(),
       });
@@ -107,7 +107,7 @@ class EventController {
           startTime: startTime,
           endTime: endTime,
           title: title,
-          img: `http://localhost:5000/${req.file.path}`,
+          img: `https://we--share.herokuapp.com/${req.file.path}`,
         },
         { new: true }
       );

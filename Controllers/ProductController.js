@@ -2,12 +2,12 @@ const express = require("express");
 let ProductModel = require("../Model/ProductModel");
 class ProductController {
   async createProduct(req, res) {
-    console.log("path", `http://localhost:5000/${req.file.path}`);
+    console.log("path", `https://we--share.herokuapp.com/${req.file.path}`);
     const { categoryId, img, description, title, userId, amount } = req.body;
     try {
       const newProduct = new ProductModel({
         categoryId: categoryId,
-        img: [`http://localhost:5000/${req.file.path}`],
+        img: [`https://we--share.herokuapp.com/${req.file.path}`],
         description: description,
         title: title,
         userId: userId,
