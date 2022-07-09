@@ -26,7 +26,7 @@ class UserController {
             try {
               const user = await UserModel.findOne({ customerId: customerId });
               if (user) {
-                  res.send({ exist: true });
+                  res.send({ exist: true, user: user});
               } else {
                   try {
                       const newUser = new UserModel({
@@ -46,6 +46,8 @@ class UserController {
           } catch (error) {
               console.log(error);
           }
+      }else{
+        res.send({ success: false});
       }
   }
 
